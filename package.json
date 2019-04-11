@@ -1,0 +1,20 @@
+{
+    "name": "theseus",
+    "version": "1.0.0",
+    "description": "pathfinding demo of a*, and djikstra algo ilustrated with p5js",
+    "main": "index.js",
+    "scripts": {
+        "start": "concurrently \"browser-sync start --server -w\" \" tsc --watch\"",
+        "build": "tsc",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "blinfoldking",
+    "license": "MIT",
+    "dependencies": {},
+    "devDependencies": {
+        "@types/p5": "^0.7.2",
+        "browser-sync": "^2.26.3",
+        "concurrently": "^4.1.0",
+        "typescript": "^3.3.4000"
+    }
+}
