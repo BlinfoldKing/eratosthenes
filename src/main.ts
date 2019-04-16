@@ -1,1 +1,5 @@
-console.log("hello world")
+let bd: Cieve;
+
+bd = new Cieve(100000);
+
+bd.print();
