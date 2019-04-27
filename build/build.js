@@ -92,7 +92,7 @@ var Brute = (function () {
                                 this.canvas.fill('#000');
                                 this.canvas.text(i, 25 + x * 50, 25 + base_height + y * 50);
                             }
-                            if (x % 20 == 0) {
+                            if (x % 19 == 0 && x > 0) {
                                 x = 0;
                                 y++;
                             }
@@ -116,7 +116,7 @@ function sleep(miliseconds) {
         return setTimeout(resolve, miliseconds);
     });
 }
-var delayTime = 100;
+var delayTime = 0;
 var canvas = function (p) {
     p.setup = function () {
         return __awaiter(this, void 0, void 0, function () {

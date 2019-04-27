@@ -1,4 +1,4 @@
-const delayTime = 100 // miliseconds
+const delayTime = 0 // miliseconds
 
 const canvas = (p: p5) => {
     p.setup = async function() {

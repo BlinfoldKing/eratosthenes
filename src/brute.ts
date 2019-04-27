@@ -41,6 +41,7 @@ class Brute {
                 this.canvas.fill('#ff0033');
             }
 
+
             if (i !== 0) {
                 if (i > 1) {
                     this.canvas.rect(x * 50, base_height + y * 50, 50, 50);
@@ -49,7 +50,7 @@ class Brute {
                     this.canvas.text(i, 25 + x * 50, 25 + base_height + y * 50);
                 }
 
-                if (x % 20 == 0) {
+                if (x % 19 == 0 && x > 0) {
                     x = 0;
                     y++;
                 } else {
