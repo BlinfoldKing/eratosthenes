@@ -1,9 +1,11 @@
 class Brute {
 
     private upperBound: number;
+    private canvas: p5;
 
-    constructor(n: number) {
+    constructor(n: number, p: p5) {
         this.upperBound = n;
+        this.canvas = p;
     }
 
     // An utility method to check wheter a number
@@ -27,9 +29,33 @@ class Brute {
 
     // Method to print all prime numbers
     public async calculate(): Promise<void> {
-        for (let i: number = 2; i <= this.upperBound; i++) {
-            if (await this.isPrime(i))
-                console.log(i);
+        // draw start
+        let y = 0;
+        let x = 0;
+        let base_height = (this.upperBound / 20) * 50 + 100 
+        for (let i: number = 0; i <= this.upperBound; i++) {
+
+            if (await this.isPrime(i)) {
+                this.canvas.fill('#00ff33');
+            } else {
+                this.canvas.fill('#ff0033');
+            }
+
+            if (i !== 0) {
+                if (i > 1) {
+                    this.canvas.rect(x * 50, base_height + y * 50, 50, 50);
+                    this.canvas.textAlign(this.canvas.CENTER, this.canvas.CENTER);
+                    this.canvas.fill('#000');
+                    this.canvas.text(i, 25 + x * 50, 25 + base_height + y * 50);
+                }
+
+                if (x % 20 == 0) {
+                    x = 0;
+                    y++;
+                } else {
+                    x++;
+                }
+            }
         }
     }
 }

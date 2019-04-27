@@ -34,8 +34,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var Brute = (function () {
-    function Brute(n) {
+    function Brute(n, p) {
         this.upperBound = n;
+        this.canvas = p;
     }
     Brute.prototype.isPrime = function (n) {
         return __awaiter(this, void 0, void 0, function () {
@@ -65,18 +66,40 @@ var Brute = (function () {
     };
     Brute.prototype.calculate = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var i;
+            var y, x, base_height, i;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        i = 2;
+                        y = 0;
+                        x = 0;
+                        base_height = (this.upperBound / 20) * 50 + 100;
+                        i = 0;
                         _a.label = 1;
                     case 1:
                         if (!(i <= this.upperBound)) return [3, 4];
                         return [4, this.isPrime(i)];
                     case 2:
-                        if (_a.sent())
-                            console.log(i);
+                        if (_a.sent()) {
+                            this.canvas.fill('#00ff33');
+                        }
+                        else {
+                            this.canvas.fill('#ff0033');
+                        }
+                        if (i !== 0) {
+                            if (i > 1) {
+                                this.canvas.rect(x * 50, base_height + y * 50, 50, 50);
+                                this.canvas.textAlign(this.canvas.CENTER, this.canvas.CENTER);
+                                this.canvas.fill('#000');
+                                this.canvas.text(i, 25 + x * 50, 25 + base_height + y * 50);
+                            }
+                            if (x % 20 == 0) {
+                                x = 0;
+                                y++;
+                            }
+                            else {
+                                x++;
+                            }
+                        }
                         _a.label = 3;
                     case 3:
                         i++;
@@ -99,19 +122,12 @@ var canvas = function (p) {
         return __awaiter(this, void 0, void 0, function () {
             var era, bru;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        p.createCanvas(p.windowWidth, p.windowHeight);
-                        era = new Sieve(100, p);
-                        return [4, era.calculate()];
-                    case 1:
-                        _a.sent();
-                        bru = new Brute(100);
-                        return [4, bru.calculate()];
-                    case 2:
-                        _a.sent();
-                        return [2];
-                }
+                p.createCanvas(p.windowWidth, p.windowHeight);
+                era = new Sieve(100, p);
+                era.calculate();
+                bru = new Brute(100, p);
+                bru.calculate();
+                return [2];
             });
         });
     };
