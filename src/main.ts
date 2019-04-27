@@ -1,5 +1,17 @@
-let bd: Cieve;
+const canvas = (p: p5) => {
+    p.setup = function() {
+    }
 
-bd = new Cieve(100000);
+    p.draw = function() {
+        // p.noLoop();
+        let i = 0;
+        // while(i < 100) {
+            setInterval(() => {
+                p.createP("Hello World")
+            }, 5000);
+        // }
+    }
+}
 
-bd.print();
+
+new p5(canvas);
