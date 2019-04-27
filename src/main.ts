@@ -1,10 +1,9 @@
-const delayTime = 500 // miliseconds
+const delayTime = 100 // miliseconds
 
 const canvas = (p: p5) => {
     p.setup = async function() {
-        p.createP("hello");
-        p.createP("world");
-        const era = new Sieve(100);
+        p.createCanvas(p.windowWidth, p.windowHeight);
+        const era = new Sieve(100, p);
         await era.calculate();
 
         const bru = new Brute(100);

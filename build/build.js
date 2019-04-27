@@ -93,7 +93,7 @@ function sleep(miliseconds) {
         return setTimeout(resolve, miliseconds);
     });
 }
-var delayTime = 500;
+var delayTime = 100;
 var canvas = function (p) {
     p.setup = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -101,9 +101,8 @@ var canvas = function (p) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        p.createP("hello");
-                        p.createP("world");
-                        era = new Sieve(100);
+                        p.createCanvas(p.windowWidth, p.windowHeight);
+                        era = new Sieve(100, p);
                         return [4, era.calculate()];
                     case 1:
                         _a.sent();
@@ -121,29 +120,60 @@ var canvas = function (p) {
 };
 new p5(canvas);
 var Sieve = (function () {
-    function Sieve(n) {
+    function Sieve(n, p) {
         this.upperBound = n;
+        this.canvas = p;
     }
     Sieve.prototype.calculate = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var i, i, j;
+            var y, x, i, i, pos, j, pos_1, i, pos;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         this.prime = new Array(this.upperBound + 1);
+                        this.table = new Array(this.upperBound + 1);
+                        y = 0;
+                        x = 0;
                         for (i = 0; i <= this.upperBound; i++) {
                             this.prime[i] = true;
+                            if (i !== 0) {
+                                if (i > 1) {
+                                    this.table[i] = { x: x * 50, y: y * 50 };
+                                    this.canvas.rect(x * 50, y * 50, 50, 50);
+                                    this.canvas.textAlign(this.canvas.CENTER, this.canvas.CENTER);
+                                    this.canvas.text(i, 25 + x * 50, 25 + y * 50);
+                                }
+                                if (i % 20 == 0) {
+                                    x = 0;
+                                    y++;
+                                }
+                                else {
+                                    x++;
+                                }
+                            }
                         }
                         i = 2;
                         _a.label = 1;
                     case 1:
-                        if (!((i * i) <= this.upperBound)) return [3, 7];
+                        if (!((i * i) <= this.upperBound)) return [3, 6];
                         if (!(this.prime[i] == true)) return [3, 5];
+                        pos = this.table[i];
+                        this.canvas.fill('#3300ff');
+                        this.canvas.rect(pos.x, pos.y, 50, 50);
+                        this.canvas.textAlign(this.canvas.CENTER, this.canvas.CENTER);
+                        this.canvas.fill('#000');
+                        this.canvas.text(i, 25 + pos.x, 25 + pos.y);
                         j = (i * i);
                         _a.label = 2;
                     case 2:
                         if (!(j <= this.upperBound)) return [3, 5];
                         this.prime[j] = false;
+                        pos_1 = this.table[j];
+                        this.canvas.fill('#ff0033');
+                        this.canvas.rect(pos_1.x, pos_1.y, 50, 50);
+                        this.canvas.textAlign(this.canvas.CENTER, this.canvas.CENTER);
+                        this.canvas.fill('#fff');
+                        this.canvas.text(j, 25 + pos_1.x, 25 + pos_1.y);
                         return [4, sleep(delayTime)];
                     case 3:
                         _a.sent();
@@ -152,12 +182,20 @@ var Sieve = (function () {
                         j += i;
                         return [3, 2];
                     case 5:
-                        console.log(i * i);
-                        _a.label = 6;
-                    case 6:
                         i++;
                         return [3, 1];
-                    case 7: return [2];
+                    case 6:
+                        for (i = 2; i < this.prime.length; i++) {
+                            if (this.prime[i]) {
+                                pos = this.table[i];
+                                this.canvas.fill('#00ff33');
+                                this.canvas.rect(pos.x, pos.y, 50, 50);
+                                this.canvas.textAlign(this.canvas.CENTER, this.canvas.CENTER);
+                                this.canvas.fill('#000');
+                                this.canvas.text(i, 25 + pos.x, 25 + pos.y);
+                            }
+                        }
+                        return [2];
                 }
             });
         });
