@@ -1,15 +1,11 @@
 const canvas = (p: p5) => {
-    p.setup = function() {
+    p.setup = async function() {
+        p.createP("hello");
+        await sleep(1000);
+        p.createP("world");
     }
 
     p.draw = function() {
-        // p.noLoop();
-        let i = 0;
-        // while(i < 100) {
-            setInterval(() => {
-                p.createP("Hello World")
-            }, 5000);
-        // }
     }
 }
 
