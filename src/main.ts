@@ -4,10 +4,10 @@ const canvas = (p: p5) => {
     p.setup = async function() {
         p.createCanvas(p.windowWidth, p.windowHeight);
         const era = new Sieve(100, p);
-        era.calculate();
+        era.visualize();
 
         const bru = new Brute(100, p);
-        bru.calculate();
+        bru.visualize();
     }
 
     p.draw = function() {

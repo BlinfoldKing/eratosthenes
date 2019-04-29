@@ -15,7 +15,7 @@ class Sieve {
     }
 
     // An utility method to build the sieve of eratosthenes algorithm
-    public async calculate(): Promise<void> {
+    public async visualize(): Promise<void> {
 
         // Create a boolean array prime[0..N] and 
         // initialize all entries it as true 

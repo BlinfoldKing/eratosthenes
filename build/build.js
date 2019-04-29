@@ -64,7 +64,7 @@ var Brute = (function () {
             });
         });
     };
-    Brute.prototype.calculate = function () {
+    Brute.prototype.visualize = function () {
         return __awaiter(this, void 0, void 0, function () {
             var y, x, base_height, i;
             return __generator(this, function (_a) {
@@ -111,6 +111,25 @@ var Brute = (function () {
     };
     return Brute;
 }());
+var delayTime = 0;
+var canvas = function (p) {
+    p.setup = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var era, bru;
+            return __generator(this, function (_a) {
+                p.createCanvas(p.windowWidth, p.windowHeight);
+                era = new Sieve(100, p);
+                era.visualize();
+                bru = new Brute(100, p);
+                bru.visualize();
+                return [2];
+            });
+        });
+    };
+    p.draw = function () {
+    };
+};
+new p5(canvas);
 function sleep(miliseconds) {
     return new Promise(function (resolve, reject) {
         return setTimeout(resolve, miliseconds);
@@ -124,9 +143,9 @@ var canvas = function (p) {
             return __generator(this, function (_a) {
                 p.createCanvas(p.windowWidth, p.windowHeight);
                 era = new Sieve(100, p);
-                era.calculate();
+                era.visualize();
                 bru = new Brute(100, p);
-                bru.calculate();
+                bru.visualize();
                 return [2];
             });
         });
@@ -140,7 +159,7 @@ var Sieve = (function () {
         this.upperBound = n;
         this.canvas = p;
     }
-    Sieve.prototype.calculate = function () {
+    Sieve.prototype.visualize = function () {
         return __awaiter(this, void 0, void 0, function () {
             var y, x, i, i, pos, j, pos_1, i, pos;
             return __generator(this, function (_a) {

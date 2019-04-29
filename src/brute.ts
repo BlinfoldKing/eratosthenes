@@ -28,7 +28,7 @@ class Brute {
     }
 
     // Method to print all prime numbers
-    public async calculate(): Promise<void> {
+    public async visualize(): Promise<void> {
         // draw start
         let y = 0;
         let x = 0;
