@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Theseus</title>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.dom.min.js"></script>
+        <script src="./build/build.js"></script>
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css" rel="stylesheet"/>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+
+        <style>
+         * {
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <nav style="margin-bottom: 100px" class="navbar is-warning" role="navigation" aria-label="dropdown navigation">
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">
+                    Menu
+                </a>
+
+                <div class="navbar-dropdown">
+                    <a href="index.html" class="navbar-item">
+                        Visualization
+                    </a>
+                    <a class="navbar-item">
+                        Complexity
+                    </a>
+                </div>
+            </div>
+
+        </nav>
+
+        <div class="container">
+        </div>
+
+        <div class="columns" style="margin-left: 100px">
+            <div class="column is-3">
+                <h3 class="title is-3">Brute Force</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Value
+                            </th>
+                            <th>
+                                Process Count
+                            </th>
+                            <th>
+                                Time(s)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div>
+            <div class="column is-3">
+                <h3 class="title is-3">Sieve of Erathotehenes</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Value
+                            </th>
+                            <th>
+                                Process Count
+                            </th>
+                            <th>
+                                Time(s)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="column">
+                <canvas id="chart1"></canvas>
+                <button class="button is-info">Start Benchmark</button>
+            </div>
+        </div>
+        <script>
+         Main.calculate()
+         var ctx = document.getElementById('chart1').getContext('2d');
+         var chart = new Chart(ctx, {
+             // The type of chart we want to create
+             type: 'line',
+
+             // The data for our dataset
+             data: {
+                 labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                 datasets: [{
+                     label: 'My First dataset',
+                     backgroundColor: 'rgb(255, 99, 132)',
+                     borderColor: 'rgb(255, 99, 132)',
+                     data: [0, 10, 5, 2, 20, 30, 45]
+                 }]
+             },
+
+             // Configuration options go here
+             options: {}
+         });
+        </script>
+    </body>
+</html>
