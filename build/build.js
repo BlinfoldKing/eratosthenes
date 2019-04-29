@@ -138,6 +138,43 @@ var Brute = (function (_super) {
     };
     return Brute;
 }(Primality));
+var delayTime = 0;
+var canvas = function (p) {
+    var slider = p.createSlider(2, 300, 100);
+    function visualize() {
+        p.clear();
+        p.text('Test Case', 1100, slider.y - 160);
+        p.text('2', 1080, slider.y - 140);
+        p.text('300', slider.width + 1120, slider.y - 140);
+        var val = slider.value();
+        var era = new Sieve(val);
+        era.visualize(p);
+        var bru = new Brute(val);
+        bru.visualize(p);
+    }
+    p.setup = function () {
+        p.createCanvas(p.windowWidth, p.windowHeight * 2);
+        slider.position(1100, p.windowHeight / 2);
+        p.text('Test Case', 1100, slider.y - 160);
+        p.text('2', 1080, slider.y - 140);
+        p.text('300', slider.width + 1120, slider.y - 140);
+        var button = p.createButton('start');
+        button.position(1200, p.windowHeight / 2 + 30);
+        button.mouseClicked(visualize);
+    };
+    p.draw = function () {
+    };
+};
+var Main = (function () {
+    function Main() {
+    }
+    Main.visualize = function () {
+        new p5(canvas);
+    };
+    Main.calculate = function () {
+    };
+    return Main;
+}());
 function sleep(miliseconds) {
     return new Promise(function (resolve, reject) {
         return setTimeout(resolve, miliseconds);
@@ -145,29 +182,45 @@ function sleep(miliseconds) {
 }
 var delayTime = 0;
 var canvas = function (p) {
+    var slider = p.createSlider(2, 300, 100);
+    function visualize() {
+        p.clear();
+        p.text('Test Case', 1100, slider.y - 160);
+        p.text('2', 1080, slider.y - 140);
+        p.text('300', slider.width + 1120, slider.y - 140);
+        var val = slider.value();
+        var era = new Sieve(val);
+        era.visualize(p);
+        var bru = new Brute(val);
+        bru.visualize(p);
+    }
     p.setup = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var era, bru;
-            return __generator(this, function (_a) {
-                p.createCanvas(p.windowWidth, p.windowHeight);
-                era = new Sieve(100);
-                era.visualize(p);
-                bru = new Brute(100);
-                bru.visualize(p);
-                return [2];
-            });
-        });
+        p.createCanvas(p.windowWidth, p.windowHeight * 2);
+        slider.position(1100, p.windowHeight / 2);
+        p.text('Test Case', 1100, slider.y - 160);
+        p.text('2', 1080, slider.y - 140);
+        p.text('300', slider.width + 1120, slider.y - 140);
+        var button = p.createButton('start');
+        button.position(1200, p.windowHeight / 2 + 30);
+        button.mouseClicked(visualize);
     };
     p.draw = function () {
     };
 };
-new p5(canvas);
+var Main = (function () {
+    function Main() {
+    }
+    Main.visualize = function () {
+        new p5(canvas);
+    };
+    Main.calculate = function () {
+    };
+    return Main;
+}());
 var Sieve = (function (_super) {
     __extends(Sieve, _super);
     function Sieve(n) {
-        var _this = _super.call(this, n) || this;
-        _this.upperBound = n;
-        return _this;
+        return _super.call(this, n) || this;
     }
     Sieve.prototype.visualize = function (canvas) {
         return __awaiter(this, void 0, void 0, function () {

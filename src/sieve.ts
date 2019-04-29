@@ -9,14 +9,13 @@ class Sieve extends Primality {
 
     constructor (n: number) {
         super(n);
-        this.upperBound = n;
     }
 
     // An utility method to build the sieve of eratosthenes algorithm
     public async visualize(canvas: p5): Promise<void> {
 
         // Create a boolean array prime[0..N] and 
-        // initialize all entries it as true 
+        // initialize all entries it as true
         this.prime = new Array<boolean>(this.upperBound+1);
         this.table = new Array<position>(this.upperBound+1);
         let y = 0;

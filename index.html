@@ -6,6 +6,8 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.dom.min.js"></script>
         <script src="./build/build.js"></script>
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css" rel="stylesheet"/>
         <style>
          * {
              margin: 0;
@@ -14,5 +16,24 @@
         </style>
     </head>
     <body>
+        <nav style="margin-bottom: 100px" class="navbar is-warning" role="navigation" aria-label="dropdown navigation">
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">
+                    Menu
+                </a>
+
+                <div class="navbar-dropdown">
+                    <a class="navbar-item">
+                        Visualization
+                    </a>
+                    <a class="navbar-item">
+                        Complexity
+                    </a>
+                </div>
+            </div>
+        </nav>
+        <script>
+         Main.visualize()
+        </script>
     </body>
 </html>

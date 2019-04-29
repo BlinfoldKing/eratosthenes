@@ -1,7 +1,7 @@
 abstract class Primality {
 
-    protected proccess_counter: number;
-    protected upperBound: number;
+    public proccess_counter: number;
+    public upperBound: number;
 
     constructor(n: number) {
         this.proccess_counter = 0;
