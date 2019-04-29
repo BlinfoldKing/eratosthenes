@@ -1,3 +1,23 @@
+var Primality = (function () {
+    function Primality(n) {
+        this.proccess_counter = 0;
+        this.upperBound = n;
+    }
+    return Primality;
+}());
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -33,10 +53,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var Brute = (function () {
-    function Brute(n, p) {
-        this.upperBound = n;
-        this.canvas = p;
+var Brute = (function (_super) {
+    __extends(Brute, _super);
+    function Brute(n) {
+        return _super.call(this, n) || this;
     }
     Brute.prototype.isPrime = function (n) {
         return __awaiter(this, void 0, void 0, function () {
@@ -64,7 +84,7 @@ var Brute = (function () {
             });
         });
     };
-    Brute.prototype.visualize = function () {
+    Brute.prototype.visualize = function (canvas) {
         return __awaiter(this, void 0, void 0, function () {
             var y, x, base_height, i;
             return __generator(this, function (_a) {
@@ -80,17 +100,17 @@ var Brute = (function () {
                         return [4, this.isPrime(i)];
                     case 2:
                         if (_a.sent()) {
-                            this.canvas.fill('#00ff33');
+                            canvas.fill('#00ff33');
                         }
                         else {
-                            this.canvas.fill('#ff0033');
+                            canvas.fill('#ff0033');
                         }
                         if (i !== 0) {
                             if (i > 1) {
-                                this.canvas.rect(x * 50, base_height + y * 50, 50, 50);
-                                this.canvas.textAlign(this.canvas.CENTER, this.canvas.CENTER);
-                                this.canvas.fill('#000');
-                                this.canvas.text(i, 25 + x * 50, 25 + base_height + y * 50);
+                                canvas.rect(x * 50, base_height + y * 50, 50, 50);
+                                canvas.textAlign(canvas.CENTER, canvas.CENTER);
+                                canvas.fill('#000');
+                                canvas.text(i, 25 + x * 50, 25 + base_height + y * 50);
                             }
                             if (x % 19 == 0 && x > 0) {
                                 x = 0;
@@ -109,27 +129,15 @@ var Brute = (function () {
             });
         });
     };
-    return Brute;
-}());
-var delayTime = 0;
-var canvas = function (p) {
-    p.setup = function () {
+    Brute.prototype.calculate = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var era, bru;
             return __generator(this, function (_a) {
-                p.createCanvas(p.windowWidth, p.windowHeight);
-                era = new Sieve(100, p);
-                era.visualize();
-                bru = new Brute(100, p);
-                bru.visualize();
-                return [2];
+                return [2, [false]];
             });
         });
     };
-    p.draw = function () {
-    };
-};
-new p5(canvas);
+    return Brute;
+}(Primality));
 function sleep(miliseconds) {
     return new Promise(function (resolve, reject) {
         return setTimeout(resolve, miliseconds);
@@ -142,10 +150,10 @@ var canvas = function (p) {
             var era, bru;
             return __generator(this, function (_a) {
                 p.createCanvas(p.windowWidth, p.windowHeight);
-                era = new Sieve(100, p);
-                era.visualize();
-                bru = new Brute(100, p);
-                bru.visualize();
+                era = new Sieve(100);
+                era.visualize(p);
+                bru = new Brute(100);
+                bru.visualize(p);
                 return [2];
             });
         });
@@ -154,12 +162,14 @@ var canvas = function (p) {
     };
 };
 new p5(canvas);
-var Sieve = (function () {
-    function Sieve(n, p) {
-        this.upperBound = n;
-        this.canvas = p;
+var Sieve = (function (_super) {
+    __extends(Sieve, _super);
+    function Sieve(n) {
+        var _this = _super.call(this, n) || this;
+        _this.upperBound = n;
+        return _this;
     }
-    Sieve.prototype.visualize = function () {
+    Sieve.prototype.visualize = function (canvas) {
         return __awaiter(this, void 0, void 0, function () {
             var y, x, i, i, pos, j, pos_1, i, pos;
             return __generator(this, function (_a) {
@@ -174,9 +184,9 @@ var Sieve = (function () {
                             if (i !== 0) {
                                 if (i > 1) {
                                     this.table[i] = { x: x * 50, y: y * 50 };
-                                    this.canvas.rect(x * 50, y * 50, 50, 50);
-                                    this.canvas.textAlign(this.canvas.CENTER, this.canvas.CENTER);
-                                    this.canvas.text(i, 25 + x * 50, 25 + y * 50);
+                                    canvas.rect(x * 50, y * 50, 50, 50);
+                                    canvas.textAlign(canvas.CENTER, canvas.CENTER);
+                                    canvas.text(i, 25 + x * 50, 25 + y * 50);
                                 }
                                 if (i % 20 == 0) {
                                     x = 0;
@@ -193,22 +203,22 @@ var Sieve = (function () {
                         if (!((i * i) <= this.upperBound)) return [3, 6];
                         if (!(this.prime[i] == true)) return [3, 5];
                         pos = this.table[i];
-                        this.canvas.fill('#3300ff');
-                        this.canvas.rect(pos.x, pos.y, 50, 50);
-                        this.canvas.textAlign(this.canvas.CENTER, this.canvas.CENTER);
-                        this.canvas.fill('#000');
-                        this.canvas.text(i, 25 + pos.x, 25 + pos.y);
+                        canvas.fill('#3300ff');
+                        canvas.rect(pos.x, pos.y, 50, 50);
+                        canvas.textAlign(canvas.CENTER, canvas.CENTER);
+                        canvas.fill('#000');
+                        canvas.text(i, 25 + pos.x, 25 + pos.y);
                         j = (i * i);
                         _a.label = 2;
                     case 2:
                         if (!(j <= this.upperBound)) return [3, 5];
                         this.prime[j] = false;
                         pos_1 = this.table[j];
-                        this.canvas.fill('#ff0033');
-                        this.canvas.rect(pos_1.x, pos_1.y, 50, 50);
-                        this.canvas.textAlign(this.canvas.CENTER, this.canvas.CENTER);
-                        this.canvas.fill('#fff');
-                        this.canvas.text(j, 25 + pos_1.x, 25 + pos_1.y);
+                        canvas.fill('#ff0033');
+                        canvas.rect(pos_1.x, pos_1.y, 50, 50);
+                        canvas.textAlign(canvas.CENTER, canvas.CENTER);
+                        canvas.fill('#fff');
+                        canvas.text(j, 25 + pos_1.x, 25 + pos_1.y);
                         return [4, sleep(delayTime)];
                     case 3:
                         _a.sent();
@@ -223,11 +233,11 @@ var Sieve = (function () {
                         for (i = 2; i < this.prime.length; i++) {
                             if (this.prime[i]) {
                                 pos = this.table[i];
-                                this.canvas.fill('#00ff33');
-                                this.canvas.rect(pos.x, pos.y, 50, 50);
-                                this.canvas.textAlign(this.canvas.CENTER, this.canvas.CENTER);
-                                this.canvas.fill('#000');
-                                this.canvas.text(i, 25 + pos.x, 25 + pos.y);
+                                canvas.fill('#00ff33');
+                                canvas.rect(pos.x, pos.y, 50, 50);
+                                canvas.textAlign(canvas.CENTER, canvas.CENTER);
+                                canvas.fill('#000');
+                                canvas.text(i, 25 + pos.x, 25 + pos.y);
                             }
                         }
                         return [2];
@@ -235,6 +245,13 @@ var Sieve = (function () {
             });
         });
     };
+    Sieve.prototype.calculate = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2, [false]];
+            });
+        });
+    };
     return Sieve;
-}());
+}(Primality));
 //# sourceMappingURL=build.js.map

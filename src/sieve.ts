@@ -3,19 +3,17 @@ type position = {
     y: number
 }
 
-class Sieve {
-    private upperBound: number;
+class Sieve extends Primality {
     private prime: boolean[];
     private table: position[];
-    private canvas: p5;
 
-    constructor (n: number, p: p5) {
+    constructor (n: number) {
+        super(n);
         this.upperBound = n;
-        this.canvas = p;
     }
 
     // An utility method to build the sieve of eratosthenes algorithm
-    public async visualize(): Promise<void> {
+    public async visualize(canvas: p5): Promise<void> {
 
         // Create a boolean array prime[0..N] and 
         // initialize all entries it as true 
@@ -30,9 +28,9 @@ class Sieve {
             if (i !== 0) {
                 if (i > 1) {
                     this.table[i] = {x: x * 50, y: y * 50};
-                    this.canvas.rect(x * 50, y * 50, 50, 50);
-                    this.canvas.textAlign(this.canvas.CENTER, this.canvas.CENTER);
-                    this.canvas.text(i, 25 + x * 50, 25 + y * 50);
+                    canvas.rect(x * 50, y * 50, 50, 50);
+                    canvas.textAlign(canvas.CENTER, canvas.CENTER);
+                    canvas.text(i, 25 + x * 50, 25 + y * 50);
                 }
                 if (i % 20 == 0) {
                     x = 0;
@@ -52,11 +50,11 @@ class Sieve {
             if(this.prime[i] == true) {
                 // draw start
                 let pos: position = this.table[i];
-                this.canvas.fill('#3300ff');
-                this.canvas.rect(pos.x, pos.y, 50, 50);
-                this.canvas.textAlign(this.canvas.CENTER, this.canvas.CENTER);
-                this.canvas.fill('#000');
-                this.canvas.text(i, 25 + pos.x, 25 + pos.y);
+                canvas.fill('#3300ff');
+                canvas.rect(pos.x, pos.y, 50, 50);
+                canvas.textAlign(canvas.CENTER, canvas.CENTER);
+                canvas.fill('#000');
+                canvas.text(i, 25 + pos.x, 25 + pos.y);
                 // draw end
 
 
@@ -66,11 +64,11 @@ class Sieve {
 
                     // draw start
                     let pos: position = this.table[j];
-                    this.canvas.fill('#ff0033');
-                    this.canvas.rect(pos.x, pos.y, 50, 50);
-                    this.canvas.textAlign(this.canvas.CENTER, this.canvas.CENTER);
-                    this.canvas.fill('#fff');
-                    this.canvas.text(j, 25 + pos.x, 25 + pos.y);
+                    canvas.fill('#ff0033');
+                    canvas.rect(pos.x, pos.y, 50, 50);
+                    canvas.textAlign(canvas.CENTER, canvas.CENTER);
+                    canvas.fill('#fff');
+                    canvas.text(j, 25 + pos.x, 25 + pos.y);
                     // draw end
 
                     await sleep(delayTime);
@@ -82,14 +80,18 @@ class Sieve {
             if (this.prime[i]) {
                 // draw start
                 let pos: position = this.table[i];
-                this.canvas.fill('#00ff33');
-                this.canvas.rect(pos.x, pos.y, 50, 50);
-                this.canvas.textAlign(this.canvas.CENTER, this.canvas.CENTER);
-                this.canvas.fill('#000');
-                this.canvas.text(i, 25 + pos.x, 25 + pos.y);
+                canvas.fill('#00ff33');
+                canvas.rect(pos.x, pos.y, 50, 50);
+                canvas.textAlign(canvas.CENTER, canvas.CENTER);
+                canvas.fill('#000');
+                canvas.text(i, 25 + pos.x, 25 + pos.y);
                 // draw end
             }
         }
+    }
+
+    public async calculate(): Promise<boolean[]> {
+        return [false];
     }
 
 }

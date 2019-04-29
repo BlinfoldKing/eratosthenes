@@ -1,11 +1,7 @@
-class Brute {
+class Brute extends Primality {
 
-    private upperBound: number;
-    private canvas: p5;
-
-    constructor(n: number, p: p5) {
-        this.upperBound = n;
-        this.canvas = p;
+    constructor(n: number) {
+        super(n)
     }
 
     // An utility method to check wheter a number
@@ -28,7 +24,7 @@ class Brute {
     }
 
     // Method to print all prime numbers
-    public async visualize(): Promise<void> {
+    public async visualize(canvas: p5): Promise<void> {
         // draw start
         let y = 0;
         let x = 0;
@@ -36,18 +32,18 @@ class Brute {
         for (let i: number = 0; i <= this.upperBound; i++) {
 
             if (await this.isPrime(i)) {
-                this.canvas.fill('#00ff33');
+                canvas.fill('#00ff33');
             } else {
-                this.canvas.fill('#ff0033');
+                canvas.fill('#ff0033');
             }
 
 
             if (i !== 0) {
                 if (i > 1) {
-                    this.canvas.rect(x * 50, base_height + y * 50, 50, 50);
-                    this.canvas.textAlign(this.canvas.CENTER, this.canvas.CENTER);
-                    this.canvas.fill('#000');
-                    this.canvas.text(i, 25 + x * 50, 25 + base_height + y * 50);
+                    canvas.rect(x * 50, base_height + y * 50, 50, 50);
+                    canvas.textAlign(canvas.CENTER, canvas.CENTER);
+                    canvas.fill('#000');
+                    canvas.text(i, 25 + x * 50, 25 + base_height + y * 50);
                 }
 
                 if (x % 19 == 0 && x > 0) {
@@ -58,5 +54,9 @@ class Brute {
                 }
             }
         }
+    }
+
+    public async calculate(): Promise<boolean[]> {
+        return [false]
     }
 }
