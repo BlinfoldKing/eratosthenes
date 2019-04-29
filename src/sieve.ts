@@ -90,7 +90,31 @@ class Sieve extends Primality {
     }
 
     public async calculate(): Promise<boolean[]> {
-        return [false];
+        // Create a boolean array prime[0..N] and 
+        // initialize all entries it as true
+        this.prime = new Array<boolean>(this.upperBound+1);
+        let y = 0;
+        let x = 0;
+        for (let i: number = 0; i <= this.upperBound; i++) {
+            this.prime[i] = true;
+        }
+
+        // Changes the value in prime[i]
+        // The value will finally be false if i is not prime, else true
+        for (let i: number = 2; (i*i) <= this.upperBound; i++) {
+
+            // If prime[i] is not changed, then it is a prime
+            if(this.prime[i] == true) {
+                // Update all multiples of i to false
+                for (let j: number = (i*i); j <= this.upperBound; j += i) {
+                    this.prime[j] = false;
+                    await sleep(delayTime);
+                    this.proccess_counter++;
+                }
+            }
+        }
+
+        return this.prime
     }
 
 }

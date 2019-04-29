@@ -17,6 +17,7 @@ class Brute extends Primality {
             // If n divisible by i, return false
             if (n % i == 0) return false;
             await sleep(delayTime);
+            this.proccess_counter++;
         }
 
         // N is a prime number, return true
@@ -57,6 +58,22 @@ class Brute extends Primality {
     }
 
     public async calculate(): Promise<boolean[]> {
-        return [false]
+        // draw start
+        let result: boolean[] = Array<boolean>(this.upperBound);
+        
+        let y = 0;
+        let x = 0;
+        let base_height = (this.upperBound / 20) * 50 + 100 
+        for (let i: number = 0; i <= this.upperBound; i++) {
+
+            if (await this.isPrime(i)) {
+                result[i] = true;
+            } else {
+                result[i] = false;
+            }
+
+
+        }
+        return result;
     }
 }

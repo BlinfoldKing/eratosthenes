@@ -42,7 +42,23 @@ class Main {
         new p5(canvas)
     }
 
-    static calculate(): void {
-        // time complexity counter
+    static async calculateBrute(i: number): Promise<number[]> {
+        const bru = new Brute(i);
+
+        let t0 = performance.now()
+        await bru.calculate();
+        let t1 = performance.now()
+
+        return [i, bru.proccess_counter, t1 - t0]
+    }
+
+    static async calculateSieve(i: number): Promise<number[]> {
+        const era = new Sieve(i);
+
+        let t0 = performance.now()
+        await era.calculate();
+        let t1 = performance.now()
+
+        return [i, era.proccess_counter, t1 - t0]
     }
 }
