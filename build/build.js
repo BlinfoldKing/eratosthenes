@@ -186,7 +186,7 @@ var canvas = function (p) {
         input.position(1100, p.windowHeight / 2);
         input_html.addClass('input');
         input_html.attribute('type', 'number');
-        input_html.attribute('placeholder', 'Enter Lower bound (2..300)');
+        input_html.attribute('placeholder', 'Enter Upper bound (2..300)');
         var button = p.createButton('Start Simulation');
         button.position(1200, p.windowHeight / 2 + 30 + input.height);
         button.mouseClicked(visualize);
