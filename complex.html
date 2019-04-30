@@ -85,7 +85,8 @@
             </div>
             <div class="column">
                 <button id="start" onclick="runBenchmark()" class="button is-info">Start Benchmark</button>
-                <input id="modifier" class="input" name="" type="number" value="10" placeholder="modifier" style="display: inline; width:auto" />Times
+                <input id="modifier" class="input" name="" type="number" value="10" placeholder="multiplier" style="display: inline; width:auto" />Times
+                <input id="step" class="input" name="" type="number" value="10" placeholder="Step" style="display: inline; width:auto" />Step
                 <canvas id="chart1"></canvas>
                 <canvas id="chart2"></canvas>
             </div>
@@ -110,7 +111,7 @@
              valueLabel = []
              sieveTimeset = []
              bruteTimeset = []
-             for (let i = 0; i <= 10; i++) {
+             for (let i = 0; i <= step; i++) {
                  valueLabel.push(i * modifier);
                  bruteDataset.push(0);
                  sieveDataset.push(0);
@@ -127,6 +128,7 @@
          async function runBenchmark() {
              $('#start').attr('disabled', true);
              modifier = $('#modifier').val();
+             step = $('#step').val();
              reset()
              runBrute();
              runSieve();
@@ -181,7 +183,7 @@
          }
 
          async function runBrute() {
-             for (let i = 1; i <= 10; i++) {
+             for (let i = 1; i <= step; i++) {
                  let result = await Main.calculateBrute(i * modifier);
                  let newElem = `<tr><td>${result[0]}</td><td>${result[1]}</td><td>${result[2]}</td></tr>`;
                  bruteDataset[i] = result[1];
@@ -195,7 +197,7 @@
          }
 
          async function runSieve() {
-             for (let i = 1; i <= 10; i++) {
+             for (let i = 1; i <= step; i++) {
                  let result = await Main.calculateSieve(i * modifier);
                  let newElem = `<tr><td>${result[0]}</td><td>${result[1]}</td><td>${result[2]}</td></tr>`;
                  sieveDataset[i] = result[1];
