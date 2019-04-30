@@ -1,14 +1,13 @@
 let delayTime = 0 // miliseconds
 
 const canvas = (p: p5) => {
-    let slider: any = p.createSlider(2, 300, 100);
+    let input: any = p.createInput();
     function visualize() {
         p.clear();
-        p.text('Test Case', 1100, slider.y - 160);
-        p.text('2', 1080, slider.y - 140);
-        p.text('300', slider.width + 1120, slider.y - 140);
+        p.text('Upper bound: ', 1100, input.y - 160);
 
-        let val = slider.value();
+
+        let val = input.value();
         const era = new Sieve(val);
         era.visualize(p);
 
@@ -19,11 +18,9 @@ const canvas = (p: p5) => {
 
     p.setup = function() {
         p.createCanvas(p.windowWidth, p.windowHeight * 2);
-
-        slider.position(1100, p.windowHeight/2);
-        p.text('Test Case', 1100, slider.y - 160);
-        p.text('2', 1080, slider.y - 140);
-        p.text('300', slider.width + 1120, slider.y - 140);
+        
+        input.position(1100, p.windowHeight/2);
+        p.text('Upper bound: ', 1100, input.y - 160);
 
         let button = p.createButton('start');
         button.position(1200, p.windowHeight / 2 + 30);
