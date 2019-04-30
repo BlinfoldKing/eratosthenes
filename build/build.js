@@ -163,71 +163,6 @@ var Brute = (function (_super) {
     };
     return Brute;
 }(Primality));
-var delayTime = 0;
-var canvas = function (p) {
-    var input = p.createInput();
-    function visualize() {
-        p.clear();
-        p.text('Upper bound: ', 1100, input.y - 160);
-        var val = input.value();
-        var era = new Sieve(val);
-        era.visualize(p);
-        var bru = new Brute(val);
-        bru.visualize(p);
-    }
-    p.setup = function () {
-        p.createCanvas(p.windowWidth, p.windowHeight * 2);
-        input.position(1100, p.windowHeight / 2);
-        p.text('Upper bound: ', 1100, input.y - 160);
-        var button = p.createButton('start');
-        button.position(1200, p.windowHeight / 2 + 30);
-        button.mouseClicked(visualize);
-    };
-    p.draw = function () {
-    };
-};
-var Main = (function () {
-    function Main() {
-    }
-    Main.visualize = function () {
-        new p5(canvas);
-    };
-    Main.calculateBrute = function (i) {
-        return __awaiter(this, void 0, void 0, function () {
-            var bru, t0, t1;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        bru = new Brute(i);
-                        t0 = performance.now();
-                        return [4, bru.calculate()];
-                    case 1:
-                        _a.sent();
-                        t1 = performance.now();
-                        return [2, [i, bru.proccess_counter, t1 - t0]];
-                }
-            });
-        });
-    };
-    Main.calculateSieve = function (i) {
-        return __awaiter(this, void 0, void 0, function () {
-            var era, t0, t1;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        era = new Sieve(i);
-                        t0 = performance.now();
-                        return [4, era.calculate()];
-                    case 1:
-                        _a.sent();
-                        t1 = performance.now();
-                        return [2, [i, era.proccess_counter, t1 - t0]];
-                }
-            });
-        });
-    };
-    return Main;
-}());
 function sleep(miliseconds) {
     return new Promise(function (resolve, reject) {
         return setTimeout(resolve, miliseconds);
@@ -235,10 +170,10 @@ function sleep(miliseconds) {
 }
 var delayTime = 0;
 var canvas = function (p) {
-    var input = p.createInput();
+    var input_html = p.createInput();
     function visualize() {
+        var input = input_html;
         p.clear();
-        p.text('Upper bound: ', 1100, input.y - 160);
         var val = input.value();
         var era = new Sieve(val);
         era.visualize(p);
@@ -247,11 +182,16 @@ var canvas = function (p) {
     }
     p.setup = function () {
         p.createCanvas(p.windowWidth, p.windowHeight * 2);
+        var input = input_html;
         input.position(1100, p.windowHeight / 2);
-        p.text('Upper bound: ', 1100, input.y - 160);
-        var button = p.createButton('start');
-        button.position(1200, p.windowHeight / 2 + 30);
+        input_html.addClass('input');
+        input_html.attribute('type', 'number');
+        input_html.attribute('placeholder', 'Enter Lower bound (2..300)');
+        var button = p.createButton('Start Simulation');
+        button.position(1200, p.windowHeight / 2 + 30 + input.height);
         button.mouseClicked(visualize);
+        button.addClass('button');
+        button.addClass('is-info');
     };
     p.draw = function () {
     };

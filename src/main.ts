@@ -1,11 +1,10 @@
 let delayTime = 0 // miliseconds
 
 const canvas = (p: p5) => {
-    let input: any = p.createInput();
+    let input_html = p.createInput();
     function visualize() {
+        let input: any = input_html;
         p.clear();
-        p.text('Upper bound: ', 1100, input.y - 160);
-
 
         let val = input.value();
         const era = new Sieve(val);
@@ -18,13 +17,17 @@ const canvas = (p: p5) => {
 
     p.setup = function() {
         p.createCanvas(p.windowWidth, p.windowHeight * 2);
-        
+        let input: any = input_html;
         input.position(1100, p.windowHeight/2);
-        p.text('Upper bound: ', 1100, input.y - 160);
+        input_html.addClass('input');
+        input_html.attribute('type', 'number');
+        input_html.attribute('placeholder', 'Enter Lower bound (2..300)');
 
-        let button = p.createButton('start');
-        button.position(1200, p.windowHeight / 2 + 30);
+        let button = p.createButton('Start Simulation');
+        button.position(1200, p.windowHeight / 2 + 30 + input.height);
         button.mouseClicked(visualize);
+        button.addClass('button')
+        button.addClass('is-info')
 
     }
 
